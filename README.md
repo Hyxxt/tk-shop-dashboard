@@ -3,6 +3,10 @@
 TikTok Shop 与海外社媒矩阵（Instagram / Facebook / YouTube）的经营数据看板。
 覆盖**数据采集 → 清洗入库 → 指标聚合 → 前端可视化 → 权限控制**完整闭环。
 
+- 仓库：https://github.com/Hyxxt/tk-shop-dashboard
+- 部署说明：[docs/DEPLOY.md](docs/DEPLOY.md)（Render Blueprint，前端 + 后端一起拉起来）
+- 演示账号：`admin / admin123`（全权限）、`viewer / viewer123`（只读，可验证 403）
+
 > 数据说明：本项目所有经营数据均为**模拟数据**，用于演示技术链路，不含任何真实平台经营数据，也不涉及任何平台私有接口。
 
 ![看板](docs/shots/02-dashboard.png)
