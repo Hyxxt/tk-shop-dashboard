@@ -1,0 +1,8 @@
+fastapi>=0.115
+uvicorn[standard]>=0.32
+SQLAlchemy>=2.0.36
+PyMySQL>=1.1.1
+pydantic>=2.9
+
+# 可选：真实抓取 TikTok Shop 后台时才需要
+# playwright>=1.48

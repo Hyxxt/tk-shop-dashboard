@@ -1,0 +1,37 @@
+# Render Blueprint —— 一键拉起后端 API + 前端静态站
+# 用法：Render Dashboard → New → Blueprint → 选本仓库，会自动读取这个文件
+services:
+  # ---------- 后端 FastAPI ----------
+  - type: web
+    name: tk-shop-api
+    runtime: python
+    plan: free
+    region: singapore
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.4"
+      # 演示库：容器重启后自动重建表 + 灌模拟数据（SQLite 不持久，正好每次都是干净数据）
+      - key: AUTO_SEED
+        value: "1"
+      - key: CORS_ORIGINS
+        value: "*"
+
+  # ---------- 前端静态站 ----------
+  - type: web
+    name: tk-shop-dashboard
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE
+        # 部署完如果后端域名不是这个，改这里再重新部署一次
+        value: https://tk-shop-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
