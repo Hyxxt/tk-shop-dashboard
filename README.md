@@ -3,7 +3,11 @@
 TikTok Shop 与海外社媒矩阵（Instagram / Facebook / YouTube）的经营数据看板。
 覆盖**数据采集 → 清洗入库 → 指标聚合 → 前端可视化 → 权限控制**完整闭环。
 
+**在线演示：https://tk-shop-dashboard.onrender.com**
+（免费实例 15 分钟无请求会休眠，首次打开约 50 秒冷启动）
+
 - 仓库：https://github.com/Hyxxt/tk-shop-dashboard
+- API 文档：https://tk-shop-api.onrender.com/docs
 - 部署说明：[docs/DEPLOY.md](docs/DEPLOY.md)（Render Blueprint，前端 + 后端一起拉起来）
 - 演示账号：`admin / admin123`（全权限）、`viewer / viewer123`（只读，可验证 403）
 
@@ -53,6 +57,22 @@ python run.py
 ```
 
 ORM 与 SQL DDL 一一对应，切库不用改一行业务代码。
+
+## 线上部署状态
+
+| 项 | 地址 / 说明 |
+|---|---|
+| 前端 | https://tk-shop-dashboard.onrender.com |
+| 后端 | https://tk-shop-api.onrender.com （`/docs` 可看接口文档） |
+| 数据库 | SQLite，容器重启后 `AUTO_SEED=1` 自动重灌演示数据 |
+| 配置 | `render.yaml`（Blueprint），`docs/verify-online.js`（生产站点浏览器验收脚本） |
+
+`docs/verify-online.js` 是对**生产环境**跑的真实浏览器验收，实测结果：
+
+- 指标卡 `$334.9k / 8,786 / 15.5万 / $38.12`，折线图 30 个数据点，店铺列表 5 行；
+- admin 账号采集按钮可用，viewer 账号按钮 `disabled=true`；
+- viewer 登录后侧边栏自动少「数据规模」，手敲 `#/system` 被守卫弹回看板；
+- console 零报错、零失败请求，`access-control-allow-origin: *` 正常返回。
 
 ## 目录结构
 
